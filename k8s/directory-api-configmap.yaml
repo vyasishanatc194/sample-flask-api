@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: directory-api-config
+data:
+  JWT_SECRET_KEY_NAME: "auth_jwt_secret_dev"
+  AUTH_KEY_SALT_NAME: "auth_key_salt_dev"
+  ENABLE_SENTRY_TRACKING: "True"
+  DB_NAME: "prod_bhfaxdb"
+  DB_USER: "bhfaxuser"
+  DB_HOST: "10.110.96.3"
+  AUTH_TABLE_NAME: "clinic_support_user_info"
+  ENABLE_GCLOUD_LOGGING: "True"
+  ENABLE_REFERER_CHECK: "True"

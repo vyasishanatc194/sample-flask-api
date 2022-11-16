@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: directory-api
+    tier: api
+  name: directory-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: directory-api
+      tier: api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: directory-api
+        tier: api
+    spec:
+      imagePullSecrets:
+        - name: gitlab-registry-cred
+      containers:
+      - env:
+        envFrom:
+        - configMapRef:
+            name: directory-api-config
+        - secretRef:
+            name: directory-api-secrets
+        image: registry.gitlab.com/phelixaigroup/npi_api:latest
+        name: directory-api
+        ports:
+        - containerPort: 5001
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
+      serviceAccount: directory-api-ksa
+      serviceAccountName: directory-api-ksa
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+status: {}

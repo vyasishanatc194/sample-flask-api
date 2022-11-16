@@ -1,0 +1,4 @@
+
+
+class InvalidRefererError(Exception):
+    pass

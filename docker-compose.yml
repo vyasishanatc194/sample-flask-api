@@ -1,0 +1,19 @@
+version: '3.0'
+services:
+  npi_directory_api:
+    restart: always
+    build: .
+    container_name: npi_directory_api
+    env_file:
+      .env_docker
+    ports:
+      - 5001:5001
+    expose:
+      - 5001
+    entrypoint: "/app/run_app.sh"
+    volumes:
+      - ${GCP_KEY_PATH}:/app/project_secrets/form_builder_google_service_account.json:ro
+
+
+volumes:
+  redisdata:

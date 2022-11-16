@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    kubernetes.io/ingress.class: nginx
+  generation: 1
+  name: directory-api-ingress
+  namespace: default
+spec:
+  rules:
+  - host: directory.phelix.ai
+    http:
+      paths:
+      - backend:
+          serviceName: directory-api
+          servicePort: 5001
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - directory.phelix.ai
+    secretName: directory-api.phelix.ai-tls
+status:
+  loadBalancer:
+    ingress:
+    - ip: 35.203.107.181
